@@ -238,24 +238,86 @@ h3 {
 
 .hero-roles {
   display: flex;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 3rem;
 }
 
+.hero-cta {
+  margin-top: 1rem;
+}
+
+.primary-btn {
+  display: inline-block;
+  padding: 1.2rem 2.8rem;
+  background: var(--brand-color);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  transition: all 0.4s var(--ease-out-quart);
+  box-shadow: 0 10px 30px rgba(100, 100, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(100, 100, 255, 0.5);
+  background: #7a7aff;
+}
+
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: all 0.6s;
+}
+
+.primary-btn:hover::before {
+  left: 100%;
+}
+
 .role-pill {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border-subtle);
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(136, 136, 144, 0.3);
+  /* Using text-secondary with transparency */
   border-radius: 50px;
   font-size: 0.85rem;
-  color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.01);
-  backdrop-filter: blur(5px);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.role-pill:hover {
+  border-color: var(--brand-color);
+  background: rgba(100, 100, 255, 0.08);
+  transform: translateY(-2px);
+  color: #fff;
 }
 
 .hero-visual {
   position: relative;
-  height: 600px;
+  height: 500px;
+  /* Reduced from 600px */
   width: 100%;
+  max-width: 450px;
+  /* Added width constraint */
+  margin: 0 auto;
+  /* Center in its grid column */
 }
 
 /* Modern Image Masking */
@@ -482,10 +544,14 @@ h3 {
 
 /* --- Section 4.5: Portfolio CTA --- */
 #portfolio-cta {
-  padding: 10vh 0;
+  padding: 6rem 4rem;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 10vh auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 32px;
+  backdrop-filter: blur(10px);
 }
 
 #portfolio-cta .section-header {

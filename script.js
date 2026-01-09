@@ -28,15 +28,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = (clientY / innerHeight - 0.5) * 2;
 
             // Tilt the container
-            heroMask.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg) scale(0.98)`;
+            heroMask.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
 
             // Move the image INSIDE opposite to create depth
-            heroImg.style.transform = `scale(1.1) translate(${-x * 15}px, ${-y * 15}px)`;
+            heroImg.style.transform = `translate(${-x * 15}px, ${-y * 15}px)`;
         });
 
         heroSection.addEventListener('mouseleave', () => {
-            heroMask.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
-            heroImg.style.transform = `scale(1) translate(0, 0)`;
+            heroMask.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
+            heroImg.style.transform = `translate(0, 0)`;
         });
     }
 
