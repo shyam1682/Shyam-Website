@@ -496,12 +496,7 @@ h3 {
   will-change: transform;
 }
 
-/* Pause on hover only on devices that support hover */
-@media (hover: hover) {
-  .gallery-track:hover {
-    animation-play-state: paused;
-  }
-}
+/* Removed pause on hover to ensure continuous marquee on all devices */
 
 @keyframes marquee {
   0% {
