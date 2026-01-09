@@ -131,22 +131,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 6. Theme Toggle ---
+    // --- 6. Theme Toggle (Persistent) ---
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         const themeIcon = themeToggle.querySelector('i');
         const html = document.documentElement;
 
-        themeToggle.addEventListener('click', () => {
-            const isLight = html.getAttribute('data-theme') === 'light';
+        // Function to set theme
+        const setTheme = (theme) => {
+            html.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
 
-            if (isLight) {
-                html.setAttribute('data-theme', 'dark');
-                themeIcon.classList.replace('ion-md-sunny', 'ion-md-moon');
-            } else {
-                html.setAttribute('data-theme', 'light');
+            if (theme === 'light') {
                 themeIcon.classList.replace('ion-md-moon', 'ion-md-sunny');
+            } else {
+                themeIcon.classList.replace('ion-md-sunny', 'ion-md-moon');
             }
+        };
+
+        // Initialize theme: check localStorage, otherwise default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
         });
     }
 
