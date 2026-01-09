@@ -1,12 +1,92 @@
 :root {
-  --primary-bg: #0a0a0c;
-  --accent-color: #6366f1;
-  --secondary-accent: #a855f7;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  scroll-behavior: smooth;
+  /* Default (Dark) Theme */
+  --bg-darkor: #08080a;
+  --bg-panel: rgba(255, 255, 255, 0.03);
+  --bg-panel-hover: rgba(255, 255, 255, 0.06);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --text-primary: #ededeea8;
+  --text-secondary: #888890;
+  --text-heading: #fff;
+  --input-bg: transparent;
+
+  /* Bento Card Colors (Dark) */
+  --card-bg-gradient: linear-gradient(145deg, #0b0b0d, #11111f);
+  --card-bg-hover: linear-gradient(145deg, #0e0e11, #161629);
+  --card-border: rgba(100, 100, 255, 0.1);
+  --card-shadow:
+    12px 12px 24px #040405,
+    -8px -8px 20px rgba(100, 100, 255, 0.03),
+    0 0 15px rgba(100, 100, 255, 0.05);
+  --card-shadow-hover:
+    15px 15px 30px #030304,
+    -10px -10px 30px rgba(100, 100, 255, 0.1),
+    0 0 25px rgba(100, 100, 255, 0.15);
+
+  --h1-gradient: linear-gradient(to bottom right, #fff, #999);
+
+  --brand-color: #6464ff;
+  --accent-glow: #6d28d9;
+  --accent-secondary: #3b82f6;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+[data-theme="light"] {
+  --bg-darkor: #e4e4e7;
+  /* Darker, softer grey to reduce harshness */
+  --bg-panel: #ffffff;
+  --bg-panel-hover: #fcfcfc;
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --text-primary: #3f3f46;
+  /* Zinc 700 */
+  --text-secondary: #71717a;
+  /* Zinc 500 */
+  --text-heading: #18181b;
+  /* Zinc 900 */
+  --input-bg: rgba(0, 0, 0, 0.03);
+
+  --h1-gradient: linear-gradient(to bottom right, #000000, #333333);
+  /* Black gradient */
+
+  /* Bento Card Colors (Light) - Softer Surface & Subtle Glow */
+  --card-bg-gradient: linear-gradient(145deg, #f7f7f8, #eaeaec);
+  /* Darker off-white */
+  --card-bg-hover: linear-gradient(145deg, #ffffff, #f0f0f3);
+  --card-border: rgba(0, 0, 0, 0.03);
+  --card-shadow:
+    5px 5px 15px rgba(0, 0, 0, 0.05);
+  /* Simple drop shadow, no highlights/glows */
+  --card-shadow-hover:
+    8px 8px 20px rgba(0, 0, 0, 0.08),
+    -5px -5px 20px rgba(255, 255, 255, 1),
+    0 0 10px rgba(100, 100, 255, 0.1);
+  /* Reduced brand glow */
+}
+
+
+
+[data-theme="light"] .theme-toggle {
+  border-color: var(--border-subtle);
+  background: #fff;
+  color: var(--text-heading);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ... existing code ... */
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--brand-color);
+  /* Updated to brand color */
+  margin-bottom: 1rem;
+  display: block;
+  font-weight: 600;
 }
 
 * {
@@ -16,108 +96,605 @@
 }
 
 body {
-  background-color: var(--primary-bg);
+  background-color: var(--bg-darkor);
   color: var(--text-primary);
-  font-family: var(--font-family);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Dynamic Background Gradient */
-.bg-glow {
+/* Background Ambient/Noise */
+/* Background Ambient/Noise */
+.noise-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0a0a0c 100%);
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: overlay;
 }
 
-.bg-sphere {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
-  filter: blur(80px);
-  opacity: 0.15;
-  border-radius: 50%;
-  animation: float 20s infinite alternate;
+/* Ambient Mouse Spotlight */
+#mouseSpotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(100, 100, 255, 0.25) 0%, rgba(100, 100, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease;
+  will-change: transform;
 }
 
-@keyframes float {
-  0% { transform: translate(-10%, -10%); }
-  100% { transform: translate(10%, 10%); }
+[data-theme="light"] #mouseSpotlight {
+  background: radial-gradient(circle, rgba(100, 100, 255, 0.15) 0%, rgba(100, 100, 255, 0) 70%);
 }
 
-/* Glassmorphism Card */
-.container {
+/* Layout Wrapper */
+.main-wrapper {
   position: relative;
-  padding: 4rem;
-  border-radius: 2rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  z-index: 10;
-  transition: transform 0.3s ease;
-}
-
-.container:hover {
-  transform: translateY(-5px);
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* Typography */
-h1 {
-  font-size: 5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text-heading);
+  /* Updated to variable */
 }
 
-.tagline {
-  font-size: 1.25rem;
+/* ... existing code ... */
+
+/* Theme Toggle FAB */
+.theme-toggle-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10000;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.theme-toggle {
+  background: var(--bg-panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-quart);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  border-color: var(--brand-color);
+  color: var(--brand-color);
+  background: var(--bg-panel-hover);
+}
+
+.theme-toggle i {
+  font-size: 1.4rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s var(--ease-out-quart);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Section 1: Hero (Modern Split) --- */
+#hero {
+  min-height: 90vh;
+  /* Not full 100 to show peek of next section */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  padding-top: 10vh;
+}
+
+.hero-content h1 {
+  font-size: 5rem;
+  line-height: 1.15;
+  /* Increased to prevent cropping of 'j' */
+  padding-bottom: 0.1em;
+  /* Safety buffer for descenders */
+  margin-bottom: 2rem;
+  background: var(--h1-gradient);
+  /* Updated to variable */
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* Fixing lint error ID: 0514bd96 */
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-roles {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.role-pill {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(5px);
+}
+
+.hero-visual {
+  position: relative;
+  height: 600px;
+  width: 100%;
+}
+
+/* Modern Image Masking */
+.hero-img-mask {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+}
+
+.hero-img-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.8);
+  transition: filter 0.5s ease;
+}
+
+.hero-img-mask:hover img {
+  filter: grayscale(0%);
+}
+
+
+/* --- Section 2: Bento Grid Interests --- */
+#bento {
+  padding: 10vh 0;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 300px);
+  gap: 1.5rem;
+}
+
+.bento-card {
+  /* Dynamic gradient based on theme */
+  background: var(--card-bg-gradient);
+
+  /* Slight border with glow */
+  border: 1px solid var(--card-border);
+  /* Updated to variable */
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-quart);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  /* Dynamic Depth Shadows */
+  box-shadow: var(--card-shadow);
+}
+
+/* ... */
+
+.big-statement span {
+  color: var(--text-heading);
+  /* Updated to variable */
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ... */
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1.2rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  color: var(--text-heading);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  background: rgba(100, 100, 255, 0.05);
+  box-shadow: 0 0 15px rgba(100, 100, 255, 0.1);
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  /* Reduced lift */
+  /* Enhanced tint and stronger glow on hover */
+  background: var(--card-bg-hover);
+  border-color: rgba(100, 100, 255, 0.3);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Bento Spans */
+.span-2 {
+  grid-column: span 2;
+}
+
+.span-1 {
+  grid-column: span 1;
+}
+
+.bento-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.bento-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  z-index: 2;
+  position: relative;
+}
+
+/* Subtle card icons/bg */
+.card-bg-icon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 4rem;
+  opacity: 0.05;
+  transition: all 0.5s ease;
+}
+
+.bento-card:hover .card-bg-icon {
+  opacity: 0.1;
+  transform: scale(1.1) rotate(5deg);
+}
+
+
+/* --- Section 3: The "Statement" Bar --- */
+#statement {
+  padding: 10vh 0;
+  text-align: center;
+  position: relative;
+}
+
+.big-statement {
+  font-size: 3rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+/* --- Section 4: Modern Carousel (Marquee) --- */
+#gallery {
+  padding-bottom: 15vh;
+  overflow: hidden;
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover (optional) */
+.gallery-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* Move half the width (since content is doubled) */
+}
+
+/* Remove scrollbars from previous implementation */
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-item {
+  width: 280px;
+  height: 420px;
+  /* 2:3 Ratio */
+  flex: 0 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.5s ease;
+  filter: sepia(20%) contrast(90%);
+}
+
+.gallery-item:hover img {
+  scale: 1.05;
+  filter: none;
+}
+
+
+/* --- Section 4.5: Portfolio CTA --- */
+#portfolio-cta {
+  padding: 10vh 0;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#portfolio-cta .section-header {
+  margin-bottom: 2rem;
+  /* Reduced gap between heading and text */
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Section 5: Contact Form --- */
+#contact {
+  padding: 10vh 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.submit-btn {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 1rem 2.5rem;
+  background: rgba(100, 100, 255, 0.1);
+  border: 1px solid rgba(100, 100, 255, 0.3);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.submit-btn:hover {
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 100, 255, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* --- Section 6: Footer --- */
+footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 4rem 0;
+  margin-top: 5vh;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.social-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 1.5rem;
+  transition: all 0.3s var(--ease-out-quart);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-link:hover {
+  color: #fff;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(100, 100, 255, 0.5));
+}
+
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(50px, 50px);
   }
 }
 
-/* Interactive Cursor Trail */
-.cursor-blob {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, var(--secondary-accent) 0%, transparent 70%);
-  filter: blur(60px);
-  opacity: 0.1;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 50%;
-  transition: transform 0.1s ease-out;
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .main-wrapper {
+    padding: 0 1.5rem;
+  }
+
+  #hero {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+    justify-items: center;
+    align-content: center;
+    min-height: auto;
+    padding-top: 15vh;
+    padding-bottom: 10vh;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-roles {
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-visual {
+    height: 400px;
+  }
+
+  /* Bento Grid Mobile */
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  .span-2 {
+    grid-column: span 1;
+  }
+
+  .bento-card {
+    min-height: 250px;
+    padding: 1.5rem;
+  }
+
+  /* Statement Mobile */
+  #statement {
+    padding: 10vh 0;
+  }
+
+  .big-statement {
+    font-size: 1.8rem;
+    line-height: 1.4;
+  }
+
+  /* Portfolio CTA Mobile */
+  .cta-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .cta-content p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  /* Gallery Mobile */
+  /* Gallery Mobile */
+  .gallery-item {
+    width: 200px;
+    height: 300px;
+    flex: 0 0 auto;
+  }
+
+  /* Footer Mobile */
+  footer {
+    padding: 3rem 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  h1 { font-size: 3rem; }
-  .container { padding: 2rem; }
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .role-pill {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-visual {
+    height: 300px;
+  }
+
+  #bento {
+    padding-top: 5vh;
+  }
 }

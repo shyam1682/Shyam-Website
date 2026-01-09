@@ -1,26 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Shyam Khambholja - Creative Developer and Designer.">
-    <title>Shyam Khambholja | Creative Developer</title>
-    <!-- Google Fonts -->
+    <title>Shyam Khambholja | Digital Presence</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="bg-glow"></div>
-    <div class="bg-sphere"></div>
-    <div class="cursor-blob" id="cursorBlob"></div>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;500;700&display=swap"
+        rel="stylesheet">
 
-    <main class="container">
-        <p class="tagline">Welcome to the digital space of</p>
-        <h1 id="mainTitle">Shyam Khambholja</h1>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Iconic Icons (using CDN for minimal icons) -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="noise-overlay"></div>
+    <div class="noise-overlay"></div>
+    <div id="mouseSpotlight"></div>
+
+    <main class="main-wrapper">
+
+        <!-- --- SECTION 1: MODERN SPLIT HERO --- -->
+        <section id="hero">
+            <div class="hero-content reveal">
+                <div class="section-label">Introduction</div>
+                <h1>Shyam Khambholja</h1>
+                <div class="hero-roles">
+                    <span class="role-pill">Observer</span>
+                    <span class="role-pill">Builder</span>
+                    <span class="role-pill">Thinker</span>
+                </div>
+                <!-- Interactive element moved to bottom right or implicit -->
+            </div>
+
+            <div class="hero-visual reveal">
+                <div class="hero-img-mask" id="heroMask">
+                    <img src="images/hero.jpeg" alt="Portrait Silhouette" data-tilt>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- --- SECTION 2: BENTO GRID INTERESTS (HIDDEN) --- -->
+        <!--
+        <section id="bento">
+            <div class="section-header reveal">
+                <span class="section-label">Curiosities</span>
+                <h2>Patterns & Signals</h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card span-2 reveal">
+                    <i class="icon ion-md-pulse card-bg-icon"></i>
+                    <h3>Rhythm & Synthesis</h3>
+                    <p>Exploring the mathematical beauty of sound and time.</p>
+                </div>
+
+                <div class="bento-card span-1 reveal">
+                    <i class="icon ion-md-infinite card-bg-icon"></i>
+                    <h3>Flow</h3>
+                    <p>Movement as language.</p>
+                </div>
+
+                <div class="bento-card span-1 reveal">
+                    <i class="icon ion-md-code card-bg-icon"></i>
+                    <h3>Craft</h3>
+                    <p>Digital sculpture through code.</p>
+                </div>
+
+                <div class="bento-card span-2 reveal">
+                    <i class="icon ion-md-planet card-bg-icon"></i>
+                    <h3>Systems</h3>
+                    <p>Understanding the invisible architecture of things.</p>
+                </div>
+            </div>
+        </section>
+        -->
+
+
+        <!-- --- SECTION 3: STATEMENT BAR --- -->
+        <section id="statement" class="reveal">
+            <p class="big-statement">
+                I believe in technology that feels <span>human</span>, experiences that feel <span>organic</span>, a
+                quiet closeness to <span>nature</span>, and a rhythm that allows <span>pause</span>.
+            </p>
+        </section>
+
+
+        <section id="gallery" class="reveal">
+            <div class="section-label" style="text-align:center; margin-bottom: 2rem;">Fragments</div>
+            <div class="gallery-track" id="galleryTrack">
+                <!-- Original Items (1-12) -->
+                <div class="gallery-item"><img src="images/1.avif" alt="Fragment 1"></div>
+                <div class="gallery-item"><img src="images/2.avif" alt="Fragment 2"></div>
+                <div class="gallery-item"><img src="images/3.avif" alt="Fragment 3"></div>
+                <div class="gallery-item"><img src="images/4.avif" alt="Fragment 4"></div>
+                <div class="gallery-item"><img src="images/5.avif" alt="Fragment 5"></div>
+                <div class="gallery-item"><img src="images/6.avif" alt="Fragment 6"></div>
+                <div class="gallery-item"><img src="images/7.avif" alt="Fragment 7"></div>
+                <div class="gallery-item"><img src="images/8.avif" alt="Fragment 8"></div>
+                <div class="gallery-item"><img src="images/9.avif" alt="Fragment 9"></div>
+                <div class="gallery-item"><img src="images/10.webp" alt="Fragment 10"></div>
+                <div class="gallery-item"><img src="images/11.avif" alt="Fragment 11"></div>
+                <div class="gallery-item"><img src="images/12.avif" alt="Fragment 12"></div>
+
+                <!-- Duplicates for Infinite Loop -->
+                <div class="gallery-item"><img src="images/1.avif" alt="Fragment 1"></div>
+                <div class="gallery-item"><img src="images/2.avif" alt="Fragment 2"></div>
+                <div class="gallery-item"><img src="images/3.avif" alt="Fragment 3"></div>
+                <div class="gallery-item"><img src="images/4.avif" alt="Fragment 4"></div>
+                <div class="gallery-item"><img src="images/5.avif" alt="Fragment 5"></div>
+                <div class="gallery-item"><img src="images/6.avif" alt="Fragment 6"></div>
+                <div class="gallery-item"><img src="images/7.avif" alt="Fragment 7"></div>
+                <div class="gallery-item"><img src="images/8.avif" alt="Fragment 8"></div>
+                <div class="gallery-item"><img src="images/9.avif" alt="Fragment 9"></div>
+                <div class="gallery-item"><img src="images/10.webp" alt="Fragment 10"></div>
+                <div class="gallery-item"><img src="images/11.avif" alt="Fragment 11"></div>
+                <div class="gallery-item"><img src="images/12.avif" alt="Fragment 12"></div>
+            </div>
+        </section>
+
+        <!-- --- SECTION 4.5: PORTFOLIO CTA --- -->
+        <section id="portfolio-cta" class="reveal">
+            <div class="section-header">
+                <span class="section-label">Substance</span>
+                <h2>The Professional Archive</h2>
+            </div>
+            <p class="cta-text">For a detailed look at my commercial work, case studies, and professional portfolio,
+                please reach
+                out. Full access is provided on a per-request basis to maintain confidentiality and focus.</p>
+        </section>
+        <section id="contact" class="reveal">
+            <div class="section-header">
+                <span class="section-label">Reach Out</span>
+                <h2>Open Channel</h2>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Thoughts..." rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Let's Connect</button>
+            </form>
+        </section>
+
+
+        <!-- --- SECTION 6: FOOTER --- -->
+        <footer class="reveal">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2025 Shyam Khambholja</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/shyamkhambholja1682" target="_blank" rel="noopener noreferrer"
+                        class="social-link" aria-label="LinkedIn">
+                        <i class="icon ion-logo-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
     </main>
+
+    <div class="theme-toggle-wrapper">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+            <i class="icon ion-md-moon"></i>
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
