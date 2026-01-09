@@ -41,6 +41,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // --- 3. 3D Tilt for Portfolio Archive ---
+    const portfolioCTA = document.getElementById('portfolio-cta');
+    if (portfolioCTA) {
+        portfolioCTA.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = portfolioCTA.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+
+            // Enhanced rotation (corner dipping/elevation)
+            portfolioCTA.style.transform = `perspective(2000px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
+
+            // Dynamic edge glow (opposite corner lighting)
+            const glowX = -x * 25;
+            const glowY = -y * 25;
+
+            portfolioCTA.style.boxShadow = `
+                ${glowX}px ${glowY}px 30px rgba(100, 100, 255, 0.2), 
+                inset ${-glowX}px ${-glowY}px 20px rgba(255, 255, 255, 0.15)
+            `;
+            portfolioCTA.style.borderColor = `rgba(100, 100, 255, 0.3)`;
+        });
+
+        portfolioCTA.addEventListener('mouseleave', () => {
+            portfolioCTA.style.transform = `perspective(2000px) rotateY(0deg) rotateX(0deg)`;
+            portfolioCTA.style.boxShadow = '';
+            portfolioCTA.style.borderColor = '';
+        });
+    }
+
+
     // --- 4. Simple Background Spotlight Tracking ---
     const spotlight = document.getElementById('mouseSpotlight');
     if (spotlight) {
