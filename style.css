@@ -79,9 +79,9 @@
 /* ... existing code ... */
 
 .section-label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0.05em;
   color: var(--brand-color);
   /* Updated to brand color */
   margin-bottom: 1rem;
@@ -236,6 +236,15 @@ h3 {
   -webkit-text-fill-color: transparent;
 }
 
+.hero-tagline {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-top: -1rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
 .hero-roles {
   display: flex;
   flex-wrap: wrap;
@@ -243,8 +252,31 @@ h3 {
   margin-bottom: 3rem;
 }
 
-.hero-cta {
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
   margin-top: 1rem;
+}
+
+.hero-social {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hero-social a {
+  color: var(--text-secondary);
+  font-size: 1.8rem;
+  transition: all 0.3s var(--ease-out-quart);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.hero-social a:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 8px rgba(100, 100, 255, 0.4));
 }
 
 .primary-btn {
@@ -327,6 +359,9 @@ h3 {
   overflow: hidden;
   border-radius: 20px;
   position: relative;
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+  will-change: transform, box-shadow;
 }
 
 .hero-img-mask img {
@@ -334,7 +369,7 @@ h3 {
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%) brightness(0.8);
-  transition: filter 0.5s ease;
+  transition: filter 0.5s ease, transform 0.3s ease-out;
 }
 
 .hero-img-mask:hover img {
@@ -566,6 +601,10 @@ h3 {
   margin: 0 auto;
 }
 
+.portfolio-actions {
+  margin-top: 3rem;
+}
+
 /* --- Section 5: Contact Form --- */
 #contact {
   padding: 10vh 0;
@@ -653,6 +692,35 @@ footer {
 .copyright {
   color: var(--text-secondary);
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+#currentYear {
+  margin: 0 0.3rem;
+}
+
+.footer-separator {
+  margin: 0 0.8rem;
+  opacity: 0.3;
+}
+
+.patriot-tag {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.flag-emoji {
+  font-size: 1.2rem;
+  margin-left: 0.4rem;
+  line-height: 1;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
 }
 
 .social-link {
@@ -705,6 +773,11 @@ footer {
     margin-bottom: 1.5rem;
   }
 
+  .hero-tagline {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
   .section-header h2 {
     font-size: 2rem;
   }
@@ -722,6 +795,11 @@ footer {
   .primary-btn {
     padding: 1rem 1.8rem;
     font-size: 0.85rem;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    gap: 1.5rem;
   }
 
   /* Bento Grid Mobile */
@@ -799,6 +877,11 @@ footer {
     text-align: center;
   }
 
+  .hero-actions {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
   .role-pill {
     padding: 0.4rem 0.8rem;
     font-size: 0.75rem;
@@ -814,5 +897,29 @@ footer {
 
   #portfolio-cta {
     padding: 3rem 1.5rem;
+  }
+
+  .copyright {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    justify-content: center;
+    gap: 0.15rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  #currentYear {
+    margin: 0 0.1rem;
+  }
+
+  .footer-separator {
+    display: inline;
+    margin: 0 0.15rem;
+  }
+
+  .flag-emoji {
+    font-size: 0.85rem;
+    margin-left: 0.1rem;
   }
 }

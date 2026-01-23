@@ -14,29 +14,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 2. Advanced Parallax & Tilt for Hero ---
-    const heroSection = document.getElementById('hero');
     const heroMask = document.getElementById('heroMask');
-    const heroImg = heroMask.querySelector('img');
+    const heroImg = heroMask ? heroMask.querySelector('img') : null;
 
-    if (heroSection) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
+    if (heroMask && heroImg) {
+        heroMask.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = heroMask.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
 
-            // Normalize coordinate (-1 to 1)
-            const x = (clientX / innerWidth - 0.5) * 2;
-            const y = (clientY / innerHeight - 0.5) * 2;
+            // Enhanced rotation (corner dipping/elevation) - Mirroring Portfolio Archive intensity
+            heroMask.style.transform = `perspective(2000px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg)`;
 
-            // Tilt the container
-            heroMask.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+            // Subtle parallax for the image inside
+            heroImg.style.transform = `scale(1.1) translate(${-x * 20}px, ${-y * 20}px)`;
 
-            // Move the image INSIDE opposite to create depth
-            heroImg.style.transform = `translate(${-x * 15}px, ${-y * 15}px)`;
+            // Dynamic edge glow (opposite corner lighting)
+            const glowX = -x * 25;
+            const glowY = -y * 25;
+
+            heroMask.style.boxShadow = `
+                ${glowX}px ${glowY}px 30px rgba(100, 100, 255, 0.2), 
+                inset ${-glowX}px ${-glowY}px 20px rgba(255, 255, 255, 0.15)
+            `;
+            heroMask.style.borderColor = `rgba(100, 100, 255, 0.3)`;
         });
 
-        heroSection.addEventListener('mouseleave', () => {
-            heroMask.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg)`;
-            heroImg.style.transform = `translate(0, 0)`;
+        heroMask.addEventListener('mouseleave', () => {
+            heroMask.style.transform = `perspective(2000px) rotateY(0deg) rotateX(0deg)`;
+            heroImg.style.transform = `scale(1) translate(0, 0)`;
+            heroMask.style.boxShadow = '';
+            heroMask.style.borderColor = '';
         });
     }
 
@@ -106,7 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 5. Contact Form Handler (Formspree Integration) ---
+    // --- 5. Portfolio Request Handler ---
+    const requestBtn = document.getElementById('requestPortfolioBtn');
+    if (requestBtn) {
+        requestBtn.addEventListener('click', () => {
+            const messageField = document.getElementById('message');
+            const nameField = document.getElementById('name');
+            if (messageField) {
+                messageField.value = "Hi Shyam, I'd like to request access to your professional portfolio.";
+            }
+            if (nameField) {
+                // Focus with a slight delay to allow smooth scroll to find its place
+                setTimeout(() => {
+                    nameField.focus();
+                }, 600);
+            }
+        });
+    }
+
+
+    // --- 6. Contact Form Handler (Formspree Integration) ---
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
 
@@ -188,6 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             setTheme(newTheme);
         });
+    }
+    // --- 7. Dynamic Year Sync ---
+    const yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
     }
 
 });
